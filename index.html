@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Granja Pairumani</title>
+  <!-- Google Fonts - Tipografía Elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&family=Montserrat:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* --- Paleta de colores elegantes --- */
+    :root {
+      --gold: #E8AA00;
+      --wine: #890017;
+      --navy: #022355;
+      --tan: #A67449;
+      --bg: #fdfaf5;
+      --radius: 14px;
+      --transition: 0.3s ease;
+    }
+
+    /* --- Reset básico --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { height: 100%; font-family: 'Lora', serif; background: var(--bg); color: #0b1220; scroll-behavior: smooth; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 0.5px; }
+    a { text-decoration: none; color: inherit; }
+
+    /* --- Contenedor general --- */
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+    /* --- Main Menu Hidden Initially --- */
+    #mainMenu {
+      display: none;
+    }
+
+    /* --- Optimización general mobile --- */
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+      body, html {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 12px;
+      }
+      body, html {
+        font-size: 13px;
+      }
+    }
+
+    /* --- Viewport y viewport-fit para notches --- */
+    @supports (padding: max(0px)) {
+      body {
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
+      }
+    }
+
+    /* --- Sección Inicio --- */
+    .hero {
+      height: 100vh;
+      background: url('GRANJaMODELOPAIRUMANI.jpg') center/cover no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    @media (max-width: 768px) {
+      .hero {
+        height: 80vh;
+        background-attachment: scroll;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero {
+        height: 60vh;
+        background-attachment: scroll;
+      }
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.3);
+    }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: white;
+      z-index: 2;
+      animation: fadeIn 1.5s ease forwards;
+    }
+    .hero-content h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .hero-content button {
+      padding: 14px 28px;
+      font-size: 20px;
+      background: var(--gold);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      touch-action: manipulation;
+    }
+    .hero-content button:hover {
+      background: var(--wine);
+      transform: scale(1.05);
+    }
+
+    /* --- Mobile optimización para hero --- */
+    @media (max-width: 768px) {
+      .hero {
+        height: 80vh;
+      }
+      .hero-content h1 {
+        font-size: 32px;
+        margin-bottom: 15px;
+      }
+      .hero-content button {
+        padding: 12px 24px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        height: 60vh;
+      }
+      .hero-content h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      .hero-content button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+
+    /* --- Sección principal con 3 botones --- */
+    .main-menu {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      animation: fadeIn 1s ease forwards;
+    }
+    .main-menu h2 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      color: var(--navy);
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    .main-menu-subtitle {
+      text-align: center;
+      color: var(--wine);
+      font-size: 18px;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      margin-bottom: 40px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--wine) 100%);
+      width: 0%;
+      transition: width 0.8s ease;
+      box-shadow: 0 0 10px rgba(232, 170, 0, 0.5);
+    }
+
+    .route-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-left: 4px solid var(--gold);
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .stat-card h4 {
+      color: var(--wine);
+      margin-bottom: 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      color: var(--navy);
+      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .route-intro {
+      background: linear-gradient(135deg, rgba(232, 170, 0, 0.05) 0%, rgba(166, 116, 73, 0.03) 100%);
+      padding: 40px;
+      border-radius: var(--radius);
+      margin-bottom: 50px;
+      border-left: 5px solid var(--gold);
+      border-right: 1px solid rgba(232, 170, 0, 0.2);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .route-intro h3 {
+      color: var(--wine);
+      margin-bottom: 20px;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .route-intro p {
+      font-size: 17px;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    .duration-info {
+      display: flex;
+      gap: 30px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      padding-top: 20px;
+      border-top: 2px dashed var(--gold);
+    }
+
+    .duration-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .duration-item strong {
+      color: var(--wine);
+      font-weight: 700;
+    }
+    
+    .menu-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .menu-buttons a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .menu-button {
+      width: 220px;
+      height: 220px;
+      border-radius: 20px;
+      border: none;
+      background: var(--navy);
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      touch-action: manipulation;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .menu-buttons img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      position: absolute;
+      top: 0; left:0;
+      opacity: 0.3;
+      transition: var(--transition);
+    }
+    .menu-buttons img:hover { opacity: 0.5; transform: scale(1.1); }
+    .menu-button span {
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .menu-button:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .menu-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(232, 170, 0, 0.05) 0%, rgba(166, 116, 73, 0.05) 100%);
+      z-index: 1;
+    }
+
+    .menu-buttons a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .menu-button {
+      width: 220px;
+      height: 220px;
+      border-radius: 20px;
+      border: none;
+      background: var(--navy);
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      touch-action: manipulation;
+    }
+
+    /* --- Mobile optimización para menú --- */
+    @media (max-width: 768px) {
+      .main-menu h2 {
+        font-size: 36px;
+      }
+      .main-menu-subtitle {
+        font-size: 16px;
+      }
+      .route-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stat-value {
+        font-size: 28px;
+      }
+      .route-intro {
+        padding: 25px;
+      }
+      .route-intro h3 {
+        font-size: 22px;
+      }
+      .route-intro p {
+        font-size: 15px;
+      }
+      .duration-info {
+        gap: 15px;
+      }
+      .menu-buttons {
+        gap: 20px;
+        flex-direction: column;
+      }
+      .menu-buttons button {
+        width: 100%;
+        height: 150px;
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-menu h2 {
+        font-size: 28px;
+      }
+      .main-menu-subtitle {
+        font-size: 14px;
+      }
+      .route-stats {
+        grid-template-columns: 1fr;
+      }
+      .stat-card {
+        padding: 15px;
+      }
+      .stat-value {
+        font-size: 24px;
+      }
+      .route-intro {
+        padding: 20px;
+      }
+      .route-intro h3 {
+        font-size: 20px;
+      }
+      .route-intro p {
+        font-size: 14px;
+      }
+      .duration-item {
+        font-size: 13px;
+      }
+      .menu-button {
+        height: 120px;
+        font-size: 16px;
+      }
+    }
+    .menu-buttons img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      position: absolute;
+      top: 0; left:0;
+      opacity: 0.4;
+      transition: var(--transition);
+    }
+    .menu-buttons img:hover { opacity: 0.6; transform: scale(1.1); }
+    .menu-button span {
+      position: relative;
+      z-index: 2;
+    }
+    .menu-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    /* --- Animación fadeIn --- */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- Secciones Ruta (Mapa, Tienda, Historia) --- */
+    .ruta-section {
+      padding: 60px 20px;
+      scroll-margin-top: 20px;
+    }
+
+    .ruta-section h2 {
+      font-size: 32px;
+      color: var(--navy);
+      margin-bottom: 20px;
+      border-bottom: 3px solid var(--gold);
+      padding-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .ruta-section h3 {
+      font-size: 22px;
+      color: var(--wine);
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .ruta-section p {
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .ruta-section img {
+      max-width: 100%;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      margin: 20px 0;
+    }
+
+    /* --- Sección Mapa --- */
+    #seccion-mapa {
+      background: linear-gradient(135deg, rgba(232, 170, 0, 0.03) 0%, rgba(166, 116, 73, 0.02) 100%);
+    }
+
+    /* --- Sección Tienda --- */
+    #seccion-tienda {
+      background: rgba(2, 35, 85, 0.02);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin: 30px 0;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: var(--transition);
+      touch-action: manipulation;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: var(--radius);
+      margin-bottom: 15px;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-card h3 {
+      font-size: 18px;
+      color: var(--navy);
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-family: 'Lora', serif;
+    }
+
+    .product-card p {
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: var(--wine);
+      font-size: 18px;
+    }
+
+    .product-card button {
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      border: none;
+      background: var(--gold);
+      color: #000;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      width: 100%;
+      font-size: 14px;
+      touch-action: manipulation;
+      margin-bottom: 8px;
+    }
+
+    .product-card button:hover {
+      background: var(--wine);
+      color: white;
+    }
+
+    .product-description {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .cart {
+      margin-top: 30px;
+      padding: 25px;
+      background: linear-gradient(135deg, rgba(232, 170, 0, 0.08) 0%, rgba(166, 116, 73, 0.03) 100%);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--gold);
+    }
+
+    .cart h3 {
+      font-size: 20px;
+      color: var(--navy);
+      margin-bottom: 15px;
+    }
+
+    .cart ul {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .cart li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gold);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart li button {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      width: auto;
+      margin: 0;
+    }
+
+    .cart li button:hover {
+      background: #c82333;
+    }
+
+    .reservation-form {
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(2, 35, 85, 0.05);
+      border-radius: var(--radius);
+      border: 2px dashed var(--gold);
+    }
+
+    .reservation-form h3 {
+      color: var(--wine);
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--navy);
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      font-family: 'Lora', serif;
+      font-size: 14px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--wine);
+      box-shadow: 0 0 5px rgba(137, 0, 23, 0.3);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .submit-btn {
+      background: var(--wine);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    /* --- Sección Historia --- */
+    #seccion-historia {
+      background: linear-gradient(135deg, rgba(137, 0, 23, 0.02) 0%, rgba(232, 170, 0, 0.02) 100%);
+    }
+
+    .values-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 30px 0;
+    }
+
+    .value-card {
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--gold);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transition: var(--transition);
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .value-card h4 {
+      font-size: 20px;
+      color: var(--navy);
+      margin-bottom: 10px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .value-card p {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .ruta-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .ruta-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gold);
+      color: #333;
+    }
+
+    .ruta-list li:last-child {
+      border-bottom: none;
+    }
+
+    .ruta-list span {
+      color: var(--wine);
+      font-weight: 600;
+      margin-right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .ruta-section {
+        padding: 40px 15px;
+      }
+
+      .ruta-section h2 {
+        font-size: 24px;
+      }
+
+      .ruta-section h3 {
+        font-size: 20px;
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .values-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .ruta-section {
+        padding: 30px 12px;
+      }
+
+      .ruta-section h2 {
+        font-size: 20px;
+      }
+
+      .ruta-section h3 {
+        font-size: 18px;
+      }
+
+      .ruta-section p {
+        font-size: 14px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .product-card h3 {
+        font-size: 16px;
+      }
+
+      .product-card p {
+        font-size: 16px;
+      }
+
+      .product-card button {
+        font-size: 12px;
+        padding: 10px 16px;
+      }
+
+      .values-container {
+        grid-template-columns: 1fr;
+      }
+
+      .value-card {
+        padding: 20px;
+      }
+
+      .value-card h4 {
+        font-size: 18px;
+      }
+
+      .value-card p {
+        font-size: 14px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Inicio -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Granja Pairumani</h1>
+      <button id="enterBtn">Entrar</button>
+    </div>
+  </section>
+
+  <!-- Menú principal -->
+  <section class="main-menu container" id="mainMenu">
+    <h2>🌾 Bienvenido a tu Ruta Turística en Granja Pairumani</h2>
+    <p class="main-menu-subtitle">Vive una experiencia única en el corazón de los valles bolivianos</p>
+    
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+
+    <div class="route-stats">
+      <div class="stat-card">
+        <h4>PARADAS</h4>
+        <div class="stat-value">3</div>
+      </div>
+      <div class="stat-card">
+        <h4>TIEMPO TOTAL</h4>
+        <div class="stat-value">2-3 hrs</div>
+      </div>
+      <div class="stat-card">
+        <h4>DIFICULTAD</h4>
+        <div class="stat-value">Fácil</div>
+      </div>
+      <div class="stat-card">
+        <h4>TUS PRODUCTOS</h4>
+        <div class="stat-value" id="cartCount">0</div>
+      </div>
+    </div>
+
+    <div class="route-intro">
+      <h3>📍 Tu experiencia comienza aquí</h3>
+      <p>Descubre la magia de Granja Pairumani a través de un recorrido único que te llevará por los rincones más hermosos de nuestras tierras. Desde el mapa de nuestros senderos hasta nuestros productos artesanales, cada parada cuenta una historia de tradición y sostenibilidad.</p>
+      <div class="duration-info">
+        <div class="duration-item">⏱️ <strong>Tiempo estimado:</strong> 2-3 horas</div>
+        <div class="duration-item">👥 <strong>Grupo ideal:</strong> Hasta 20 personas</div>
+        <div class="duration-item">📸 <strong>Fotos:</strong> Permitidas</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 40px; margin-bottom: 20px; color: var(--navy);">Selecciona tu próxima parada:</h3>
+    <div class="menu-buttons">
+      <a href="#seccion-mapa"><button class="menu-button"><img src="GRANJaMODELOPAIRUMANI.jpg" alt="Mapa de Recorrido" loading="lazy"><span>Mapa de Recorrido</span></button></a>
+      <a href="#seccion-tienda"><button class="menu-button"><img src="productos.jpg" alt="Tienda de Productos" loading="lazy"><span>Tienda de Productos</span></button></a>
+      <a href="#seccion-historia"><button class="menu-button"><img src="historia.jpg" alt="Historia de la Granja" loading="lazy"><span>Historia de la Granja</span></button></a>
+    </div>
+  </section>
+
+  <!-- Sección Mapa -->
+  <section class="ruta-section container" id="seccion-mapa">
+    <h2>🗺️ Parada 1: Mapa de Recorrido</h2>
+    <p>Bienvenido al mapa interactivo de la Granja Pairumani. Este recorrido te llevará a través de nuestras instalaciones más importantes.</p>
+    
+    <img src="mapa-granja.jpg" alt="Mapa Granja Pairumani" loading="lazy">
+    
+    <h3>Puntos principales del recorrido:</h3>
+    <ul class="ruta-list">
+      <li><span>1. Entrada Principal</span> - Bienvenida y orientación</li>
+      <li><span>2. Invernaderos</span> - Cultivos de temporada</li>
+      <li><span>3. Corrales</span> - Animales de la granja</li>
+      <li><span>4. Huerta Orgánica</span> - Cultivos ecológicos</li>
+      <li><span>5. Centro de Procesamiento</span> - Transformación de productos</li>
+      <li><span>6. Tienda y Restaurante</span> - Degustación de productos</li>
+    </ul>
+
+    <p style="margin-top: 30px; font-style: italic; color: #666;">Tiempo estimado del recorrido: 2-3 horas</p>
+  </section>
+
+  <!-- Sección Tienda -->
+  <section class="ruta-section container" id="seccion-tienda">
+    <h2>🛍️ Parada 2: Tienda de Productos</h2>
+    <p>Descubre nuestros productos artesanales elaborados con amor y dedicación. Cada uno de ellos representa la calidad y tradición de Granja Pairumani.</p>
+    
+    <div class="products">
+      <div class="product-card">
+        <img src="producto1.jpg" alt="Leche Entera" loading="lazy">
+        <h3>Leche Entera</h3>
+        <p class="product-description">Leche fresca de vaca, 100% natural sin aditivos</p>
+        <p>6.80 Bs</p>
+        <button onclick="agregarCarrito('Leche Entera', '6.80')">Añadir al carrito</button>
+      </div>
+      <div class="product-card">
+        <img src="producto2.jpg" alt="Probiótico Frutado" loading="lazy">
+        <h3>Probiótico Frutado</h3>
+        <p class="product-description">Bebida probiótica con frutas locales y cultivos vivos</p>
+        <p>20.00 Bs</p>
+        <button onclick="agregarCarrito('Probiótico Frutado', '20.00')">Añadir al carrito</button>
+      </div>
+      <div class="product-card">
+        <img src="producto3.jpg" alt="Yogurt Probiótico" loading="lazy">
+        <h3>Yogurt Probiótico</h3>
+        <p class="product-description">Yogurt cremoso con bacterias benéficas para la salud</p>
+        <p>17.00 Bs</p>
+        <button onclick="agregarCarrito('Yogurt Probiótico', '17.00')">Añadir al carrito</button>
+      </div>
+      <div class="product-card">
+        <img src="producto4.jpg" alt="Yogurt Probiótico Pequeño" loading="lazy">
+        <h3>Yogurt Probiótico (Pequeño)</h3>
+        <p class="product-description">Porción individual de yogurt probiótico natural</p>
+        <p>4.50 Bs</p>
+        <button onclick="agregarCarrito('Yogurt Probiótico Pequeño', '4.50')">Añadir al carrito</button>
+      </div>
+      <div class="product-card">
+        <img src="producto5.jpg" alt="Yogurt Sin Azúcar" loading="lazy">
+        <h3>Yogurt Sin Azúcar</h3>
+        <p class="product-description">Yogurt delicioso sin azúcar añadida, ideal para diabéticos</p>
+        <p>20.00 Bs</p>
+        <button onclick="agregarCarrito('Yogurt Sin Azúcar', '20.00')">Añadir al carrito</button>
+      </div>
+      <div class="product-card">
+        <img src="producto6.jpg" alt="Mantequilla con Sal" loading="lazy">
+        <h3>Mantequilla con Sal</h3>
+        <p class="product-description">Mantequilla artesanal con sal marina de los Andes</p>
+        <p>28.00 Bs</p>
+        <button onclick="agregarCarrito('Mantequilla con Sal', '28.00')">Añadir al carrito</button>
+      </div>
+      <div class="product-card">
+        <img src="producto7.jpg" alt="Queso Semimaduró" loading="lazy">
+        <h3>Queso Semimaduró</h3>
+        <p class="product-description">Queso tradicional de la región, textura firme y sabor intenso</p>
+        <p>30.00 Bs</p>
+        <button onclick="agregarCarrito('Queso Semimaduró', '30.00')">Añadir al carrito</button>
+      </div>
+    </div>
+
+    <div class="cart">
+      <h3>🛒 Carrito de Compras</h3>
+      <ul id="cartItems"></ul>
+      <p id="totalPrice" style="font-weight: 600; color: var(--wine); margin-top: 15px; text-align: right;">Total: 0.00 Bs</p>
+    </div>
+
+    <div class="reservation-form">
+      <h3>📋 Solicitar Reserva de Productos</h3>
+      <form id="reservationForm">
+        <div class="form-group">
+          <label for="name">Nombre Completo *</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="totalAmount">Total a Pagar: <span id="totalAmount" style="color: var(--wine); font-weight: 600;">0.00 Bs</span></label>
+        </div>
+        <button type="submit" class="submit-btn">Enviar Reserva</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Sección Historia -->
+  <section class="ruta-section container" id="seccion-historia">
+    <h2>📖 Parada 3: Historia de la Granja</h2>
+    
+    <img src="historia.jpg" alt="Historia de la Granja Pairumani" loading="lazy" style="width: 100%; border-radius: 14px; margin-bottom: 30px; box-shadow: 0 8px 30px rgba(0,0,0,0.1);">
+    
+    <p>
+      La Granja Pairumani nació hace más de tres décadas con un sueño: crear un espacio donde la tradición agrícola 
+      se encontrara con prácticas modernas y sostenibles. Ubicada en el corazón de los valles de Bolivia, nuestra 
+      granja representa el compromiso de nuestras familias con la tierra y sus frutos.
+    </p>
+
+    <p>
+      Cada generación ha aportado su sabiduría, transformando Pairumani en un referente de agricultura orgánica 
+      y turismo educativo. Hoy, nos enorgullece compartir con el mundo nuestro legado, nuestros productos y la 
+      belleza de nuestras tierras.
+    </p>
+
+    <h3>Nuestra Visión</h3>
+    <p>
+      Ser un referente en producción agroecológica y educación ambiental en Bolivia, demostrando que la sostenibilidad 
+      y la rentabilidad pueden coexistir en armonía con la naturaleza.
+    </p>
+
+    <h3>Nuestra Misión</h3>
+    <p>
+      Producir alimentos de alta calidad mediante prácticas agrícolas sostenibles, promover el turismo educativo 
+      que genere conciencia ambiental, conservar nuestras tradiciones culturales y contribuir al desarrollo 
+      integral de nuestras comunidades.
+    </p>
+
+    <h3>Valores Fundamentales</h3>
+    <div class="values-container">
+      <div class="value-card">
+        <h4>Sostenibilidad</h4>
+        <p>Cuidamos el medio ambiente en cada aspecto de nuestras operaciones, garantizando que las generaciones futuras hereden tierras fértiles.</p>
+      </div>
+      <div class="value-card">
+        <h4>Calidad</h4>
+        <p>Nos comprometemos con productos de excelencia, cultivados sin pesticidas ni químicos dañinos.</p>
+      </div>
+      <div class="value-card">
+        <h4>Educación</h4>
+        <p>Creemos en el poder educativo del turismo para transformar conciencias y crear ciudadanos responsables.</p>
+      </div>
+      <div class="value-card">
+        <h4>Comunidad</h4>
+        <p>Trabajamos en beneficio de nuestras comunidades locales, generando empleo y oportunidades de crecimiento.</p>
+      </div>
+    </div>
+
+    <h3>Nuestros Logros</h3>
+    <ul class="ruta-list">
+      <li><span>✓ Certificación en agricultura orgánica internacional</span></li>
+      <li><span>✓ Más de 50,000 visitantes satisfechos en 10 años</span></li>
+      <li><span>✓ Programas de educación ambiental en escuelas locales</span></li>
+      <li><span>✓ Reducción del 80% en residuos gracias a compostaje integral</span></li>
+    </ul>
+  </section>
+
+  <script>
+    // --- Variables globales de ruta ---
+    let routeProgress = 0;
+    const totalSteps = 3;
+    let visitedSteps = [];
+    let cartItems = 0;
+
+    // --- Mostrar menú principal al entrar ---
+    const enterBtn = document.getElementById('enterBtn');
+    const hero = document.querySelector('.hero');
+    const mainMenu = document.getElementById('mainMenu');
+    
+    enterBtn.addEventListener('click', () => {
+      hero.style.display = 'none';
+      mainMenu.style.display = 'block';
+      mostrarBienvenida();
+    });
+
+    function mostrarBienvenida() {
+      console.log('🌾 Bienvenido a la Ruta Turística de Granja Pairumani');
+    }
+
+    function actualizarProgreso() {
+      const porcentaje = (visitedSteps.length / totalSteps) * 100;
+      document.getElementById('progressBar').style.width = porcentaje + '%';
+      
+      if (porcentaje === 100) {
+        mostrarCompletado();
+      }
+    }
+
+    function mostrarCompletado() {
+      const celebracion = document.createElement('div');
+      celebracion.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 30px;
+        border-radius: 14px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        text-align: center;
+        z-index: 1000;
+      `;
+      celebracion.innerHTML = `
+        <h2 style="color: var(--wine); margin-bottom: 10px;">🎉 ¡Ruta Completada!</h2>
+        <p style="color: #666;">Has visitado todos los puntos de Granja Pairumani.</p>
+        <p style="font-size: 18px; color: var(--navy); font-weight: 600; margin-top: 15px;">
+          Total de productos: <span style="color: var(--gold);">${cartItems}</span>
+        </p>
+        <button onclick="this.parentElement.remove()" style="
+          background: var(--gold);
+          color: black;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 14px;
+          cursor: pointer;
+          margin-top: 15px;
+          font-weight: 600;
+        ">Cerrar</button>
+      `;
+      document.body.appendChild(celebracion);
+    }
+
+    // --- Registrar parada visitada ---
+    function registrarParada(nombre, id) {
+      if (!visitedSteps.includes(id)) {
+        visitedSteps.push(id);
+        actualizarProgreso();
+      }
+    }
+
+    // Guardar en sessionStorage para que persista en todas las páginas
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem('visitedSteps', JSON.stringify(visitedSteps));
+      sessionStorage.setItem('cartItems', cartItems);
+    });
+
+    // Cargar datos previos
+    window.addEventListener('load', () => {
+      const saved = sessionStorage.getItem('visitedSteps');
+      if (saved) {
+        visitedSteps = JSON.parse(saved);
+        cartItems = parseInt(sessionStorage.getItem('cartItems') || '0');
+        document.getElementById('cartCount').textContent = cartItems;
+        actualizarProgreso();
+      }
+    });
+
+    // --- Funciones del Carrito ---
+    let carrito = [];
+    let contador = 0;
+
+    function agregarCarrito(nombre, precio) {
+      const precioNum = parseFloat(precio);
+      const item = {
+        id: contador++,
+        nombre: nombre,
+        precio: precioNum
+      };
+      carrito.push(item);
+      cartItems++;
+      document.getElementById('cartCount').textContent = cartItems;
+      actualizarCarrito();
+      
+      // Marcar sección de tienda como visitada
+      if (!visitedSteps.includes('tienda')) {
+        visitedSteps.push('tienda');
+        actualizarProgreso();
+      }
+    }
+
+    function eliminarDelCarrito(id) {
+      carrito = carrito.filter(item => item.id !== id);
+      cartItems--;
+      document.getElementById('cartCount').textContent = cartItems;
+      actualizarCarrito();
+    }
+
+    function actualizarCarrito() {
+      const cartItems = document.getElementById('cartItems');
+      if (!cartItems) return;
+      
+      cartItems.innerHTML = '';
+      
+      let total = 0;
+      carrito.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${item.nombre} - ${item.precio.toFixed(2)} Bs</span>
+                        <button onclick="eliminarDelCarrito(${item.id})">Eliminar</button>`;
+        cartItems.appendChild(li);
+        total += item.precio;
+      });
+      
+      const totalPriceEl = document.getElementById('totalPrice');
+      const totalAmountEl = document.getElementById('totalAmount');
+      if (totalPriceEl) totalPriceEl.textContent = `Total: ${total.toFixed(2)} Bs`;
+      if (totalAmountEl) totalAmountEl.textContent = `${total.toFixed(2)} Bs`;
+    }
+
+    // Manejo del formulario de reserva
+    const reservationForm = document.getElementById('reservationForm');
+    if (reservationForm) {
+      reservationForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (carrito.length === 0) {
+          alert('Por favor añade productos al carrito antes de hacer una reserva.');
+          return;
+        }
+
+        const nombre = document.getElementById('name').value;
+        const total = carrito.reduce((sum, item) => sum + item.precio, 0).toFixed(2);
+
+        // Guardar carrito en sessionStorage
+        sessionStorage.setItem('cartItems', cartItems);
+        sessionStorage.setItem('reserveName', nombre);
+        
+        // Marcar tienda como visitada
+        if (!visitedSteps.includes('tienda')) {
+          visitedSteps.push('tienda');
+        }
+        sessionStorage.setItem('visitedSteps', JSON.stringify(visitedSteps));
+
+        // Mostrar mensaje de éxito con animación
+        alert(`¡Reserva Exitosa!\n\nNombre: ${nombre}\nTotal: ${total} Bs\nProductos: ${carrito.length}\n\nTu reserva ha sido confirmada. Continúa tu ruta visitando la próxima parada.`);
+
+        this.reset();
+        carrito = [];
+        contador = 0;
+        cartItems = 0;
+        document.getElementById('cartCount').textContent = cartItems;
+        actualizarCarrito();
+        
+        // Marcar historia como siguiente parada
+        if (!visitedSteps.includes('historia')) {
+          visitedSteps.push('historia');
+          actualizarProgreso();
+        }
+      });
+    }
+
+    // Detectar cuando se scroll a cada sección
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id;
+          if (sectionId === 'seccion-mapa' && !visitedSteps.includes('mapa')) {
+            visitedSteps.push('mapa');
+            actualizarProgreso();
+          } else if (sectionId === 'seccion-tienda' && !visitedSteps.includes('tienda')) {
+            visitedSteps.push('tienda');
+            actualizarProgreso();
+          } else if (sectionId === 'seccion-historia' && !visitedSteps.includes('historia')) {
+            visitedSteps.push('historia');
+            actualizarProgreso();
+          }
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.getElementById('seccion-mapa') && observer.observe(document.getElementById('seccion-mapa'));
+    document.getElementById('seccion-tienda') && observer.observe(document.getElementById('seccion-tienda'));
+    document.getElementById('seccion-historia') && observer.observe(document.getElementById('seccion-historia'));
+  </script>
+</body>
+</html>

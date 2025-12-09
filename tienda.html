@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Tienda de Productos - Granja Pairumani</title>
+  <!-- Google Fonts - Tipografía Elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&family=Montserrat:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #E8AA00;
+      --wine: #890017;
+      --navy: #022355;
+      --tan: #A67449;
+      --bg: #fdfaf5;
+      --radius: 14px;
+      --transition: 0.3s ease;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { font-family: 'Lora', serif; background: var(--bg); color: #0b1220; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 0.5px; }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+    header {
+      background: url('GRANJaMODELOPAIRUMANI.jpg') center/cover no-repeat fixed;
+      color: white;
+      padding: 20px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 0;
+    }
+
+    header .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        min-height: 150px;
+        padding: 15px 0;
+        background-attachment: scroll;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        min-height: 120px;
+        padding: 10px 0;
+        background-attachment: scroll;
+      }
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--gold);
+      color: #000;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: var(--transition);
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background: #f0b500;
+      transform: translateX(-3px);
+    }
+
+    .content {
+      padding: 40px 20px;
+    }
+
+    .content h2 {
+      font-size: 28px;
+      color: var(--navy);
+      margin-bottom: 20px;
+      border-bottom: 3px solid var(--gold);
+      padding-bottom: 10px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin: 30px 0;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: var(--transition);
+      touch-action: manipulation;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: var(--radius);
+      margin-bottom: 15px;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-card h3 {
+      font-size: 18px;
+      color: var(--navy);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .product-card p {
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: var(--wine);
+      font-size: 18px;
+    }
+
+    .product-card button {
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      border: none;
+      background: var(--gold);
+      color: #000;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      width: 100%;
+      font-size: 14px;
+      touch-action: manipulation;
+      margin-bottom: 8px;
+    }
+
+    .product-card button:hover {
+      background: var(--wine);
+      color: white;
+    }
+
+    .product-card .delete-btn {
+      background: #dc3545;
+      color: white;
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+
+    .product-card .delete-btn:hover {
+      background: #c82333;
+    }
+
+    .product-description {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .cart {
+      margin-top: 30px;
+      padding: 25px;
+      background: linear-gradient(135deg, rgba(232, 170, 0, 0.08) 0%, rgba(166, 116, 73, 0.03) 100%);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--gold);
+    }
+
+    .cart h3 {
+      font-size: 20px;
+      color: var(--navy);
+      margin-bottom: 15px;
+    }
+
+    .cart ul {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .cart li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gold);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart li button {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .cart li button:hover {
+      background: #c82333;
+    }
+
+    .reservation-form {
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(2, 35, 85, 0.05);
+      border-radius: var(--radius);
+      border: 2px dashed var(--gold);
+    }
+
+    .reservation-form h3 {
+      color: var(--wine);
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--navy);
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      font-family: 'Lora', serif;
+      font-size: 14px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--wine);
+      box-shadow: 0 0 5px rgba(137, 0, 23, 0.3);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .submit-btn {
+      background: var(--wine);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 24px; }
+      .back-btn { padding: 8px 16px; font-size: 14px; }
+      .content h2 { font-size: 24px; }
+      .products { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 20px; }
+      .back-btn { padding: 8px 14px; font-size: 12px; margin-bottom: 15px; }
+      header p { font-size: 14px; }
+      .content h2 { font-size: 20px; }
+      .products { grid-template-columns: 1fr; }
+      .product-card h3 { font-size: 16px; }
+      .product-card p { font-size: 16px; }
+      .product-card button { font-size: 12px; padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="GRANJAPAIRUMANI.html" class="back-btn">← Volver</a>
+      <h1>🛍️ Parada 2: Tienda de Productos</h1>
+      <p style="color: rgba(255,255,255,0.9); font-style: italic;">Productos frescos y artesanales - Segunda parada de tu ruta</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="content">
+      <h2>Nuestros Productos</h2>
+      
+      <div class="products">
+        <div class="product-card">
+          <img src="producto1.jpg" alt="Leche Entera" loading="lazy">
+          <h3>Leche Entera</h3>
+          <p class="product-description">Leche fresca de vaca, 100% natural sin aditivos</p>
+          <p>6.80 Bs</p>
+          <button onclick="agregarCarrito('Leche Entera', '6.80 Bs')">Añadir al carrito</button>
+        </div>
+        <div class="product-card">
+          <img src="producto2.jpg" alt="Probiótico Frutado" loading="lazy">
+          <h3>Probiótico Frutado</h3>
+          <p class="product-description">Bebida probiótica con frutas locales y cultivos vivos</p>
+          <p>20.00 Bs</p>
+          <button onclick="agregarCarrito('Probiótico Frutado', '20.00 Bs')">Añadir al carrito</button>
+        </div>
+        <div class="product-card">
+          <img src="producto3.jpg" alt="Yogurt Probiótico" loading="lazy">
+          <h3>Yogurt Probiótico</h3>
+          <p class="product-description">Yogurt cremoso con bacterias benéficas para la salud</p>
+          <p>17.00 Bs</p>
+          <button onclick="agregarCarrito('Yogurt Probiótico', '17.00 Bs')">Añadir al carrito</button>
+        </div>
+        <div class="product-card">
+          <img src="producto4.jpg" alt="Yogurt Probiótico Pequeño" loading="lazy">
+          <h3>Yogurt Probiótico (Pequeño)</h3>
+          <p class="product-description">Porción individual de yogurt probiótico natural</p>
+          <p>4.50 Bs</p>
+          <button onclick="agregarCarrito('Yogurt Probiótico Pequeño', '4.50 Bs')">Añadir al carrito</button>
+        </div>
+        <div class="product-card">
+          <img src="producto5.jpg" alt="Yogurt Sin Azúcar" loading="lazy">
+          <h3>Yogurt Sin Azúcar</h3>
+          <p class="product-description">Yogurt delicioso sin azúcar añadida, ideal para diabéticos</p>
+          <p>20.00 Bs</p>
+          <button onclick="agregarCarrito('Yogurt Sin Azúcar', '20.00 Bs')">Añadir al carrito</button>
+        </div>
+        <div class="product-card">
+          <img src="producto6.jpg" alt="Mantequilla con Sal" loading="lazy">
+          <h3>Mantequilla con Sal</h3>
+          <p class="product-description">Mantequilla artesanal con sal marina de los Andes</p>
+          <p>28.00 Bs</p>
+          <button onclick="agregarCarrito('Mantequilla con Sal', '28.00 Bs')">Añadir al carrito</button>
+        </div>
+        <div class="product-card">
+          <img src="producto7.jpg" alt="Queso Semimaduró" loading="lazy">
+          <h3>Queso Semimaduró</h3>
+          <p class="product-description">Queso tradicional de la región, textura firme y sabor intenso</p>
+          <p>30.00 Bs</p>
+          <button onclick="agregarCarrito('Queso Semimaduró', '30.00 Bs')">Añadir al carrito</button>
+        </div>
+      </div>
+
+      <div class="cart">
+        <h3>🛒 Carrito de Compras</h3>
+        <ul id="cartItems"></ul>
+        <p id="totalPrice" style="font-weight: 600; color: var(--wine); margin-top: 15px; text-align: right;">Total: 0.00 Bs</p>
+      </div>
+
+      <div class="reservation-form">
+        <h3>📋 Solicitar Reserva de Productos</h3>
+        <form id="reservationForm">
+          <div class="form-group">
+            <label for="name">Nombre Completo *</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="totalAmount">Total a Pagar: <span id="totalAmount" style="color: var(--wine); font-weight: 600;">0.00 Bs</span></label>
+          </div>
+          <button type="submit" class="submit-btn">Enviar Reserva</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.querySelector('.back-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = 'GRANJAPAIRUMANI.html';
+    });
+
+    let carrito = [];
+    let contador = 0;
+
+    function agregarCarrito(nombre, precio) {
+      const precioNum = parseFloat(precio);
+      const item = {
+        id: contador++,
+        nombre: nombre,
+        precio: precioNum
+      };
+      carrito.push(item);
+      actualizarCarrito();
+    }
+
+    function eliminarDelCarrito(id) {
+      carrito = carrito.filter(item => item.id !== id);
+      actualizarCarrito();
+    }
+
+    function actualizarCarrito() {
+      const cartItems = document.getElementById('cartItems');
+      cartItems.innerHTML = '';
+      
+      let total = 0;
+      carrito.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${item.nombre} - ${item.precio.toFixed(2)} Bs</span>
+                        <button onclick="eliminarDelCarrito(${item.id})">Eliminar</button>`;
+        cartItems.appendChild(li);
+        total += item.precio;
+      });
+      
+      document.getElementById('totalPrice').textContent = `Total: ${total.toFixed(2)} Bs`;
+      document.getElementById('totalAmount').textContent = `${total.toFixed(2)} Bs`;
+    }
+
+    // Manejo del formulario de reserva
+    document.getElementById('reservationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (carrito.length === 0) {
+        alert('Por favor añade productos al carrito antes de hacer una reserva.');
+        return;
+      }
+
+      const nombre = document.getElementById('name').value;
+      const total = carrito.reduce((sum, item) => sum + item.precio, 0).toFixed(2);
+
+      // Guardar carrito en sessionStorage
+      sessionStorage.setItem('cartItems', carrito.length);
+      sessionStorage.setItem('reserveName', nombre);
+      sessionStorage.setItem('visitedSteps', JSON.stringify(['mapa', 'tienda']));
+
+      // Mostrar mensaje de éxito con animación
+      alert(`¡Reserva Exitosa!\n\nNombre: ${nombre}\nTotal: ${total} Bs\nProductos: ${carrito.length}\n\nTu reserva ha sido confirmada. Continúa tu ruta visitando la próxima parada.`);
+
+      this.reset();
+      carrito = [];
+      contador = 0;
+      actualizarCarrito();
+    });
+  </script>
+</body>
+</html>

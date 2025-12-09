@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Historia de la Granja - Granja Pairumani</title>
+  <!-- Google Fonts - Tipografía Elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&family=Montserrat:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #E8AA00;
+      --wine: #890017;
+      --navy: #022355;
+      --tan: #A67449;
+      --bg: #fdfaf5;
+      --radius: 14px;
+      --transition: 0.3s ease;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { font-family: 'Lora', serif; background: var(--bg); color: #0b1220; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 0.5px; }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+    header {
+      background: url('GRANJaMODELOPAIRUMANI.jpg') center/cover no-repeat fixed;
+      color: white;
+      padding: 20px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 0;
+    }
+
+    header .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        min-height: 150px;
+        padding: 15px 0;
+        background-attachment: scroll;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        min-height: 120px;
+        padding: 10px 0;
+        background-attachment: scroll;
+      }
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--gold);
+      color: #000;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: var(--transition);
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background: #f0b500;
+      transform: translateX(-3px);
+    }
+
+    .content {
+      padding: 40px 20px;
+    }
+
+    .content h2 {
+      font-size: 28px;
+      color: var(--navy);
+      margin-bottom: 20px;
+      border-bottom: 3px solid var(--gold);
+      padding-bottom: 10px;
+    }
+
+    .content h3 {
+      font-size: 22px;
+      color: var(--wine);
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    .content p {
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .content img {
+      max-width: 100%;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      margin: 20px 0;
+    }
+
+    .values-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 30px 0;
+    }
+
+    .value-card {
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--gold);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transition: var(--transition);
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .value-card h4 {
+      font-size: 20px;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .value-card p {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 24px; }
+      .back-btn { padding: 8px 16px; font-size: 14px; }
+      .content h2 { font-size: 24px; }
+      .content h3 { font-size: 20px; }
+      .values-container { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 20px; }
+      .back-btn { padding: 8px 14px; font-size: 12px; margin-bottom: 15px; }
+      header p { font-size: 14px; }
+      .content h2 { font-size: 20px; }
+      .content h3 { font-size: 18px; }
+      .content p { font-size: 14px; }
+      .value-card { padding: 20px; }
+      .value-card h4 { font-size: 18px; }
+      .value-card p { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="GRANJAPAIRUMANI.html" class="back-btn">← Volver</a>
+      <h1>📖 Parada 3: Historia de la Granja</h1>
+      <p style="color: rgba(255,255,255,0.9); font-style: italic;">Tradición, pasión y sostenibilidad - Última parada de tu ruta</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="content">
+      <h2>Nuestra Historia</h2>
+      
+      <img src="historia.jpg" alt="Historia de la Granja Pairumani" loading="lazy" style="width: 100%; border-radius: 14px; margin-bottom: 30px; box-shadow: 0 8px 30px rgba(0,0,0,0.1);">
+      
+      <p>
+        La Granja Pairumani nació hace más de tres décadas con un sueño: crear un espacio donde la tradición agrícola 
+        se encontrara con prácticas modernas y sostenibles. Ubicada en el corazón de los valles de Bolivia, nuestra 
+        granja representa el compromiso de nuestras familias con la tierra y sus frutos.
+      </p>
+
+      <p>
+        Cada generación ha aportado su sabiduría, transformando Pairumani en un referente de agricultura orgánica 
+        y turismo educativo. Hoy, nos enorgullece compartir con el mundo nuestro legado, nuestros productos y la 
+        belleza de nuestras tierras.
+      </p>
+
+      <h3>Nuestra Visión</h3>
+      <p>
+        Ser un referente en producción agroecológica y educación ambiental en Bolivia, demostrando que la sostenibilidad 
+        y la rentabilidad pueden coexistir en armonía con la naturaleza.
+      </p>
+
+      <h3>Nuestra Misión</h3>
+      <p>
+        Producir alimentos de alta calidad mediante prácticas agrícolas sostenibles, promover el turismo educativo 
+        que genere conciencia ambiental, conservar nuestras tradiciones culturales y contribuir al desarrollo 
+        integral de nuestras comunidades.
+      </p>
+
+      <h3>Valores Fundamentales</h3>
+      <div class="values-container">
+        <div class="value-card">
+          <h4>Sostenibilidad</h4>
+          <p>Cuidamos el medio ambiente en cada aspecto de nuestras operaciones, garantizando que las generaciones futuras hereden tierras fértiles.</p>
+        </div>
+        <div class="value-card">
+          <h4>Calidad</h4>
+          <p>Nos comprometemos con productos de excelencia, cultivados sin pesticidas ni químicos dañinos.</p>
+        </div>
+        <div class="value-card">
+          <h4>Educación</h4>
+          <p>Creemos en el poder educativo del turismo para transformar conciencias y crear ciudadanos responsables.</p>
+        </div>
+        <div class="value-card">
+          <h4>Comunidad</h4>
+          <p>Trabajamos en beneficio de nuestras comunidades locales, generando empleo y oportunidades de crecimiento.</p>
+        </div>
+      </div>
+
+      <h3>Nuestros Logros</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding: 10px 0; border-bottom: 1px solid var(--gold);"><span style="color: var(--wine); font-weight: 600;">✓</span> Certificación en agricultura orgánica internacional</li>
+        <li style="padding: 10px 0; border-bottom: 1px solid var(--gold);"><span style="color: var(--wine); font-weight: 600;">✓</span> Más de 50,000 visitantes satisfechos en 10 años</li>
+        <li style="padding: 10px 0; border-bottom: 1px solid var(--gold);"><span style="color: var(--wine); font-weight: 600;">✓</span> Programas de educación ambiental en escuelas locales</li>
+        <li style="padding: 10px 0;"><span style="color: var(--wine); font-weight: 600;">✓</span> Reducción del 80% en residuos gracias a compostaje integral</li>
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    document.querySelector('.back-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      // Registrar parada visitada
+      const visitedSteps = JSON.parse(sessionStorage.getItem('visitedSteps') || '["mapa", "tienda"]');
+      if (!visitedSteps.includes('historia')) {
+        visitedSteps.push('historia');
+      }
+      sessionStorage.setItem('visitedSteps', JSON.stringify(visitedSteps));
+      window.location.href = 'GRANJAPAIRUMANI.html';
+    });
+  </script>
+</body>
+</html>
